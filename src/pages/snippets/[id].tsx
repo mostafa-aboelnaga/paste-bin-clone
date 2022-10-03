@@ -5,7 +5,7 @@ import { trpc } from "../../utils/trpc";
 import { BiCopy } from "react-icons/bi";
 const Snippet: NextPage = () => {
   const router = useRouter();
-  const id = router.query.id;
+  const id = router.query.id as string;
   const getSnippetQuery = trpc.useQuery(["snippet.getSnippet", { id }]);
 
   const handleCopyToClipboard = (text: string) => {
@@ -51,7 +51,7 @@ const Snippet: NextPage = () => {
               <button
                 className="w-full rounded-md bg-blue-600 p-3 text-white hover:bg-blue-500"
                 onClick={() =>
-                  handleCopyToClipboard(getSnippetQuery.data?.text!)
+                  handleCopyToClipboard(getSnippetQuery.data!.text as string)
                 }
               >
                 Copy Text To Clipboard
